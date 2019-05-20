@@ -8,7 +8,6 @@ import {
   Image,
   FlatList,
   ActivityIndicator,
-  TouchableHighlight,
   TouchableOpacity,
   Modal,
   Alert
@@ -95,7 +94,6 @@ export default class Comment extends PureComponent {
     return (
       <View style={styles.commentContainer}>
         <View style={styles.left}>
-          <TouchableHighlight onPress={this.handleUsernameTap}>
             <View style={{ alignItems: "center" }}>
               <Image
                 style={[
@@ -109,7 +107,6 @@ export default class Comment extends PureComponent {
                 }
               />
               {this.props.likesNr && this.props.likeAction ? (
-                <TouchableHighlight
                   style={[styles.actionButton, { paddingTop: 5 }]}
                   onPress={this.handleLikesTap}
                 >
@@ -117,10 +114,8 @@ export default class Comment extends PureComponent {
                     <Icon name="heart" color="#df1740" size={15} />
                     <Text style={styles.likeNr}> {this.props.likesNr}</Text>
                   </View>
-                </TouchableHighlight>
               ) : null}
             </View>
-          </TouchableHighlight>
         </View>
         <TouchableOpacity
           onPress={() => this.setState({ menuVisible: false })}
@@ -129,16 +124,13 @@ export default class Comment extends PureComponent {
         >
           <View style={styles.rightContent}>
             <View style={styles.rightContentTop}>
-              <TouchableHighlight onPress={this.handleUsernameTap}>
                 <Text style={styles.name}>{this.props.username}</Text>
-              </TouchableHighlight>
             </View>
             <Text style={styles.body}>{this.props.body}</Text>
           </View>
           <View style={styles.rightActionBar}>
             <TimeAgo style={styles.time} time={this.props.updatedAt} />
             {this.props.likeAction ? (
-              <TouchableHighlight
                 style={styles.actionButton}
                 onPress={this.handleLike}
               >
@@ -150,16 +142,13 @@ export default class Comment extends PureComponent {
                     ]}
                   >{`${this.props.i18nKeys.like || "Like"}`}</Text>
                 </View>
-              </TouchableHighlight>
             ) : null}
             {this.props.replyAction ? (
-              <TouchableHighlight
                 style={styles.actionButton}
                 onPress={this.handleReply}
               >
                 <Text style={styles.actionText}>{`${this.props.i18nKeys
                   .reply_label || "Reply"}`}</Text>
-              </TouchableHighlight>
             ) : null}
             {this.props.reportAction ? (
               <TouchableOpacity
@@ -181,9 +170,8 @@ export default class Comment extends PureComponent {
             ) : null}
           </View>
         </TouchableOpacity>
-        {this.state.menuVisible ? (
+        {this.state.menuVisible && this.props.canEdit (
           <View style={styles.menu}>
-            {this.props.canEdit ? (
               <TouchableOpacity
                 style={styles.menuItem}
                 onPress={this.handleEdit}
@@ -191,8 +179,6 @@ export default class Comment extends PureComponent {
                 <Text style={styles.menuText}>{`${this.props.i18nKeys
                   .edit_label || "Edit"}`}</Text>
               </TouchableOpacity>
-            ) : null}
-            {this.props.canEdit ? (
               <TouchableOpacity
                 style={styles.menuItem}
                 onPress={this.handleDelete}
@@ -200,9 +186,8 @@ export default class Comment extends PureComponent {
                 <Text style={styles.menuText}>{`${this.props.i18nKeys
                   .delete_label || "Delete"}`}</Text>
               </TouchableOpacity>
-            ) : null}
           </View>
-        ) : null}
+        )}
       </View>
     );
   }
