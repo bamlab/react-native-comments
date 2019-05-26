@@ -17,8 +17,8 @@ import {
 
 import PropTypes from 'prop-types';
 import IconFa from 'react-native-vector-icons/FontAwesome';
-import styles from './styles';
 import Collapsible from 'react-native-collapsible';
+import styles from './styles';
 import Comment from './Comment';
 
 const screen = Dimensions.get('screen');
@@ -33,7 +33,7 @@ export default class Comments extends PureComponent {
       editCommentText: null,
       editingComment: null,
       newCommentText: null,
-      loadingComments: props.data && props.data.length ? false : true,
+      loadingComments: !(props.data && props.data.length),
       likesModalVisible: false,
       likesModalData: null,
       editModalVisible: false,
@@ -93,7 +93,7 @@ export default class Comments extends PureComponent {
       expanded.splice(index, 1);
     }
     this.forceUpdate();
-    this.setState({ expanded: expanded });
+    this.setState({ expanded });
     if (focus && index === -1) {
       this.focusOnReplyInput(id);
     }
@@ -171,7 +171,7 @@ export default class Comments extends PureComponent {
         updatedAt={this.props.editTimeExtractor(c)}
         replyAction={this.props.replyAction ? this.handleReply : null}
         image={this.props.imageExtractor(c)}
-        child={true}
+        child
         reportAction={this.props.reportAction ? this.handleReport : null}
         liked={this.props.likeExtractor ? this.props.likeExtractor(c) : null}
         reported={this.props.reportedExtractor ? this.props.reportedExtractor(c) : null}
@@ -316,7 +316,7 @@ export default class Comments extends PureComponent {
               <TextInput
                 ref={input => (this.textInputs['input' + this.props.keyExtractor(item)] = input)}
                 style={styles.input}
-                multiline={true}
+                multiline
                 value={this.state.replyCommentText}
                 onChangeText={text => this.setState({ replyCommentText: text })}
                 placeholder={`${this.props.i18nKeys.write_comment || 'Write comment'}`}
@@ -351,7 +351,7 @@ export default class Comments extends PureComponent {
           <TextInput
             style={styles.input}
             ref={input => (this.textInputs['inputMain'] = input)}
-            multiline={true}
+            multiline
             onChangeText={text => this.setState({ newCommentText: text })}
             placeholder={`${this.props.i18nKeys.write_comment || 'Write comment'}`}
             numberOfLines={3}
@@ -401,7 +401,7 @@ export default class Comments extends PureComponent {
             }}
           >
             <ActivityIndicator
-              animating={true}
+              animating
               style={{
                 height: 50,
                 width: screen.width,
@@ -466,7 +466,7 @@ export default class Comments extends PureComponent {
           onShow={() => {
             this.textInputs['editCommentInput'].focus();
           }}
-          transparent={true}
+          transparent
           visible={this.state.editModalVisible}
           onRequestClose={() => {
             this.setEditModalVisible(false);
@@ -478,7 +478,7 @@ export default class Comments extends PureComponent {
               <TextInput
                 ref={input => (this.textInputs['editCommentInput'] = input)}
                 style={styles.input}
-                multiline={true}
+                multiline
                 value={this.state.editCommentText}
                 onChangeText={text => this.setState({ editCommentText: text })}
                 placeholder={`${this.props.i18nKeys.edit_comment || 'Edit comment'}`}

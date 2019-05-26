@@ -120,7 +120,7 @@ export default class Comment extends PureComponent {
             <Text style={styles.body}>{this.props.body}</Text>
           </View>
           <View style={styles.rightActionBar}>
-            <Text style={styles.time}>{getDistanceInWordsToNow(this.props.updatedAt, this.props.locale || 'en')}</Text>
+            <Text style={styles.time}>{getDistanceInWordsToNow(this.props.updatedAt, this.props.locale || 'en')}</Text>
             {this.props.likeAction && (
               <TouchableOpacity activeOpacity={0.7} style={styles.actionButton} onPress={this.handleLike}>
                 <View style={{ flexDirection: 'row' }}>
@@ -160,19 +160,18 @@ export default class Comment extends PureComponent {
             )}
           </View>
         </TouchableOpacity>
-        {this.state.menuVisible &&
-          this.props.canEdit && (
-            <View style={styles.menu}>
-              {!this.props.hideEditButton && (
-                <TouchableOpacity activeOpacity={0.7} style={styles.menuItem} onPress={this.handleEdit}>
-                  <Text style={styles.menuText}>{`${this.props.i18nKeys.edit_label || 'Edit'}`}</Text>
-                </TouchableOpacity>
-              )}
-              <TouchableOpacity activeOpacity={0.7} style={styles.menuItem} onPress={this.handleDelete}>
-                <Text style={styles.menuText}>{`${this.props.i18nKeys.delete_label || 'Delete'}`}</Text>
+        {this.state.menuVisible && this.props.canEdit && (
+          <View style={styles.menu}>
+            {!this.props.hideEditButton && (
+              <TouchableOpacity activeOpacity={0.7} style={styles.menuItem} onPress={this.handleEdit}>
+                <Text style={styles.menuText}>{`${this.props.i18nKeys.edit_label || 'Edit'}`}</Text>
               </TouchableOpacity>
-            </View>
-          )}
+            )}
+            <TouchableOpacity activeOpacity={0.7} style={styles.menuItem} onPress={this.handleDelete}>
+              <Text style={styles.menuText}>{`${this.props.i18nKeys.delete_label || 'Delete'}`}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   }
