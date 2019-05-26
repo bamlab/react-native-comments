@@ -17,8 +17,6 @@ import {
 
 import PropTypes from 'prop-types';
 import IconFa from 'react-native-vector-icons/FontAwesome';
-import IconFa5 from 'react-native-vector-icons/FontAwesome5Pro';
-import IconFa5Pro from 'react-native-vector-icons/FontAwesome5Pro';
 import styles from './styles';
 import Collapsible from 'react-native-collapsible';
 import Comment from './Comment';
@@ -76,13 +74,6 @@ export default class Comments extends PureComponent {
   }
 
   renderIcon(props) {
-    if (this.props.fa5) {
-      return <IconFa5 {...props} />;
-    }
-    if (this.props.fa5Pro) {
-      return <IconFa5Pro {...props} />;
-    }
-
     return <IconFa {...props} />;
   }
 
