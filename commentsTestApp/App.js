@@ -111,7 +111,6 @@ export default class ExampleComments extends Component {
   }
 
   render() {
-    const review = this.state.review;
     const data = this.state.comments;
 
     return (

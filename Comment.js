@@ -2,7 +2,7 @@
  * Created by tino on 6/6/17.
  */
 import React, { PureComponent } from 'react';
-import { View, Text, Image, FlatList, ActivityIndicator, TouchableOpacity, Modal, Alert } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';

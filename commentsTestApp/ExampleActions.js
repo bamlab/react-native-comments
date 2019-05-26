@@ -1,7 +1,6 @@
 /**
  * Created by tino on 1/15/18.
  */
-import moment from 'moment';
 const sampleCommentsRaw = require('./sampleComments');
 
 sampleCommentsRaw.forEach(c => {
