@@ -31,5 +31,10 @@
     "type": "git",
     "url": "git+https://github.com/tokict/react-native-comments.git"
   },
-  "version": "1.1.5"
+  "version": "1.1.5",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-bambi": "^1.4.0",
+    "prettier": "^1.17.1"
+  }
 }
