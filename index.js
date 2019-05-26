@@ -422,21 +422,18 @@ export default class Comments extends PureComponent {
           </View>
         ) : null}
 
-        {!this.state.loadingComments &&
-          !!this.props.data &&
-          !!this.props.data.length &&
-          !!this.props.paginateAction && (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={{ height: 70 }}
-              onPress={() => {
-                this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
-              }}
-            >
-              <Text style={{ textAlign: 'center', color: 'gray' }}>{`${this.props.i18nKeys.show_more ||
-                'Show more'}`}</Text>
-            </TouchableOpacity>
-          )}
+        {!this.state.loadingComments && !!this.props.data && !!this.props.data.length && !!this.props.paginateAction && (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={{ height: 70 }}
+            onPress={() => {
+              this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
+            }}
+          >
+            <Text style={{ textAlign: 'center', color: 'gray' }}>{`${this.props.i18nKeys.show_more ||
+              'Show more'}`}</Text>
+          </TouchableOpacity>
+        )}
 
         <Modal
           animationType={'slide'}
