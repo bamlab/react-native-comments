@@ -83,6 +83,7 @@ export default class Comment extends PureComponent {
   }
 
   render() {
+    const { additionalStyles } = this.props;
     return (
       <View style={styles.commentContainer}>
         <View style={styles.left}>
@@ -132,7 +133,7 @@ export default class Comment extends PureComponent {
                     style={[
                       styles.actionText,
                       { color: this.props.liked ? '#4DB2DF' : null },
-                      this.props.additionalStyles && this.props.additionalStyles.actionText,
+                      additionalStyles && additionalStyles.actionText,
                     ]}
                   >{`${this.props.i18nKeys.like || 'Like'}`}</Text>
                 </View>
@@ -140,9 +141,8 @@ export default class Comment extends PureComponent {
             )}
             {this.props.replyAction && (
               <TouchableOpacity activeOpacity={0.7} style={styles.actionButton} onPress={this.handleReply}>
-                <Text
-                  style={[styles.actionText, this.props.additionalStyles && this.props.additionalStyles.actionText]}
-                >{`${this.props.i18nKeys.reply_label || 'Reply'}`}</Text>
+                <Text style={[styles.actionText, additionalStyles && additionalStyles.actionText]}>{`${this.props
+                  .i18nKeys.reply_label || 'Reply'}`}</Text>
               </TouchableOpacity>
             )}
             {this.props.reportAction && (
@@ -152,13 +152,12 @@ export default class Comment extends PureComponent {
                     style={[
                       styles.actionText,
                       { fontStyle: 'italic', fontSize: 11 },
-                      this.props.additionalStyles && this.props.additionalStyles.actionText,
+                      additionalStyles && additionalStyles.actionText,
                     ]}
                   >{`${this.props.i18nKeys.reported || 'Reported'}`}</Text>
                 ) : (
-                  <Text
-                    style={[styles.actionText, this.props.additionalStyles && this.props.additionalStyles.actionText]}
-                  >{`${this.props.i18nKeys.report_label || 'Report'}`}</Text>
+                  <Text style={[styles.actionText, additionalStyles && additionalStyles.actionText]}>{`${this.props
+                    .i18nKeys.report_label || 'Report'}`}</Text>
                 )}
               </TouchableOpacity>
             )}
