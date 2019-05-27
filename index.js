@@ -329,11 +329,12 @@ export default class Comments extends PureComponent {
                   this.setState({ replyCommentText: null });
                   Keyboard.dismiss();
                 }}
+                style={{ padding: 4 }}
               >
                 {this.renderIcon({
                   style: styles.submit,
                   name: 'paper-plane',
-                  size: 40,
+                  size: 24,
                   color: 'gray',
                 })}
               </TouchableOpacity>
@@ -364,11 +365,12 @@ export default class Comments extends PureComponent {
               this.textInputs['inputMain'].clear();
               Keyboard.dismiss();
             }}
+            style={{ padding: 4 }}
           >
             {this.renderIcon({
               style: styles.submit,
-              name: 'caret-right',
-              size: 40,
+              name: 'paper-plane',
+              size: 24,
               color: 'gray',
             })}
           </TouchableOpacity>
