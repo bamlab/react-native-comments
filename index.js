@@ -332,7 +332,7 @@ export default class Comments extends PureComponent {
               >
                 {this.renderIcon({
                   style: styles.submit,
-                  name: 'caret-right',
+                  name: 'paper-plane',
                   size: 40,
                   color: 'gray',
                 })}
