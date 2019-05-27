@@ -116,7 +116,9 @@ export default class Comment extends PureComponent {
           <View style={styles.rightContent}>
             <View style={styles.rightContentTop}>
               <TouchableOpacity activeOpacity={0.7} onPress={this.handleUsernameTap}>
-                <Text style={styles.name}>{this.props.username}</Text>
+                <Text style={styles.name} numberOfLines={1}>
+                  {this.props.username}
+                </Text>
               </TouchableOpacity>
             </View>
             <Text style={styles.body}>{this.props.body}</Text>
