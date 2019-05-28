@@ -335,7 +335,10 @@ export default class Comments extends PureComponent {
                   style: styles.submit,
                   name: 'paper-plane',
                   size: 24,
-                  color: 'gray',
+                  color:
+                    this.props.accentColor && this.state.newCommentText && this.state.newCommentText.trim()
+                      ? this.props.accentColor
+                      : 'gray',
                 })}
               </TouchableOpacity>
             </View>
