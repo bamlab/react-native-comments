@@ -301,15 +301,23 @@ export default class Comments extends PureComponent {
                 {this.renderChildren(item[this.props.childPropName], this.props.keyExtractor(item))}
 
                 {this.props.childrenCountExtractor(item) > item[this.props.childPropName].length &&
-                this.props.paginateAction ? (
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => this.paginate(this.getLastChildCommentId(item), 'up', this.props.keyExtractor(item))}
-                  >
-                    <Text style={{ textAlign: 'center', paddingTop: 15 }}>{`${this.props.i18nKeys.show_more ||
-                      'Show more'}...`}</Text>
-                  </TouchableOpacity>
-                ) : null}
+                  this.props.paginateAction &&
+                  (this.props.renderPaginationButton ? (
+                    this.props.renderPaginationButton(() => {
+                      this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
+                    }, `${this.props.i18nKeys.show_more || 'Show more'}`)
+                  ) : (
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      style={{ height: 70 }}
+                      onPress={() => {
+                        this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
+                      }}
+                    >
+                      <Text style={{ textAlign: 'center', color: 'gray' }}>{`${this.props.i18nKeys.show_more ||
+                        'Show more'}`}</Text>
+                    </TouchableOpacity>
+                  ))}
               </View>
             ) : null}
             <View style={styles.inputSection}>
@@ -421,18 +429,26 @@ export default class Comments extends PureComponent {
           </View>
         ) : null}
 
-        {!this.state.loadingComments && !!this.props.data && !!this.props.data.length && !!this.props.paginateAction && (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={{ height: 70 }}
-            onPress={() => {
+        {!this.state.loadingComments &&
+          !!this.props.data &&
+          !!this.props.data.length &&
+          !!this.props.paginateAction &&
+          (this.props.renderPaginationButton ? (
+            this.props.renderPaginationButton(() => {
               this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
-            }}
-          >
-            <Text style={{ textAlign: 'center', color: 'gray' }}>{`${this.props.i18nKeys.show_more ||
-              'Show more'}`}</Text>
-          </TouchableOpacity>
-        )}
+            }, `${this.props.i18nKeys.show_more || 'Show more'}`)
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{ height: 70 }}
+              onPress={() => {
+                this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
+              }}
+            >
+              <Text style={{ textAlign: 'center', color: 'gray' }}>{`${this.props.i18nKeys.show_more ||
+                'Show more'}`}</Text>
+            </TouchableOpacity>
+          ))}
 
         <Modal
           animationType={'slide'}
@@ -549,4 +565,5 @@ Comments.propTypes = {
   additionalStyles: PropTypes.object,
   i18nKeys: PropTypes.object,
   accentColor: PropTypes.string,
+  renderPaginationButton: PropTypes.func,
 };
