@@ -245,6 +245,9 @@ export default class Comments extends PureComponent {
     );
   }
 
+  onShowMoreRepliesPress = () => this.paginate(this.getLastChildCommentId(item), 'up', this.props.keyExtractor(item));
+  onShowMoreCommentsPress = () => this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up'),
+
   /**
    * Renders a comment with pagination
    * */
@@ -303,17 +306,12 @@ export default class Comments extends PureComponent {
                 {this.props.childrenCountExtractor(item) > item[this.props.childPropName].length &&
                   this.props.paginateAction &&
                   (this.props.renderPaginationButton ? (
-                    this.props.renderPaginationButton(() => {
-                      this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
-                    }, `${this.props.i18nKeys.show_more || 'Show more'}`)
+                    this.props.renderPaginationButton(
+                      this.onShowMoreRepliesPress,
+                      `${this.props.i18nKeys.show_more || 'Show more'}`
+                    )
                   ) : (
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      style={{ height: 70 }}
-                      onPress={() => {
-                        this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
-                      }}
-                    >
+                    <TouchableOpacity activeOpacity={0.7} style={{ height: 70 }} onPress={this.onShowMoreRepliesPress}>
                       <Text style={{ textAlign: 'center', color: 'gray' }}>{`${this.props.i18nKeys.show_more ||
                         'Show more'}`}</Text>
                     </TouchableOpacity>
@@ -434,16 +432,15 @@ export default class Comments extends PureComponent {
           !!this.props.data.length &&
           !!this.props.paginateAction &&
           (this.props.renderPaginationButton ? (
-            this.props.renderPaginationButton(() => {
-              this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
-            }, `${this.props.i18nKeys.show_more || 'Show more'}`)
+            this.props.renderPaginationButton(
+              this.onShowMoreCommentsPress,
+              `${this.props.i18nKeys.show_more || 'Show more'}`
+            )
           ) : (
             <TouchableOpacity
               activeOpacity={0.7}
               style={{ height: 70 }}
-              onPress={() => {
-                this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
-              }}
+              onPress={this.onShowMoreCommentsPress}
             >
               <Text style={{ textAlign: 'center', color: 'gray' }}>{`${this.props.i18nKeys.show_more ||
                 'Show more'}`}</Text>
