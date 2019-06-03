@@ -246,7 +246,8 @@ export default class Comments extends PureComponent {
   }
 
   onShowMoreRepliesPress = () => this.paginate(this.getLastChildCommentId(item), 'up', this.props.keyExtractor(item));
-  onShowMoreCommentsPress = () => this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up'),
+  onShowMoreCommentsPress = () =>
+    this.paginate(this.props.keyExtractor(this.props.data[this.props.data.length - 1]), 'up');
 
   /**
    * Renders a comment with pagination
@@ -437,11 +438,7 @@ export default class Comments extends PureComponent {
               `${this.props.i18nKeys.show_more || 'Show more'}`
             )
           ) : (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={{ height: 70 }}
-              onPress={this.onShowMoreCommentsPress}
-            >
+            <TouchableOpacity activeOpacity={0.7} style={{ height: 70 }} onPress={this.onShowMoreCommentsPress}>
               <Text style={{ textAlign: 'center', color: 'gray' }}>{`${this.props.i18nKeys.show_more ||
                 'Show more'}`}</Text>
             </TouchableOpacity>
