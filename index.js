@@ -405,29 +405,6 @@ export default class Comments extends PureComponent {
           />
         )}
 
-        {this.state.loadingComments ? (
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 10,
-              bottom: 0,
-              height: 60,
-              backgroundColor: 'rgba(255,255,255, 0.9)',
-            }}
-          >
-            <ActivityIndicator
-              animating
-              style={{
-                height: 50,
-                width: screen.width,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              size="small"
-            />
-          </View>
-        ) : null}
-
         {!this.state.loadingComments &&
           !!this.props.data &&
           !!this.props.data.length &&
